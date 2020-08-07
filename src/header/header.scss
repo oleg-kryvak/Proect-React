@@ -1,0 +1,94 @@
+* {
+  font-family: Roboto;
+}
+
+.header {
+  display: flex;
+  padding: 20px 40px 10px 40px;
+  border-bottom: 1px solid lightgray;
+}
+
+.header__elem {
+  margin-left: 20px;
+  height: 40px;
+}
+
+.creation__event__button {
+  display: flex;
+  border-radius: 30px;
+  box-shadow: 0px 1px 5px -2px;
+  border: none;
+  background-color: lightgray;
+  cursor: pointer;
+  height: 40px;
+  width: 100px;
+}
+
+.creation__event__button:hover {
+  background-color: darkgray;
+  color: white;
+}
+
+.creation__event__button__icon {
+  font-size: 30px;
+  margin-right: 10px;
+  padding-top: 1px;
+  font-weight: 900;
+  padding-left: 5px;
+  color: green;
+}
+
+.create {
+  margin-top: 8px;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.nav-today__button {
+  border-radius: 4px;
+  background-color: lightgray;
+  cursor: pointer;
+  margin-right: 20px;
+
+  height: 40px;
+  width: 100px;
+  font-weight: 900;
+  font-size: 18px;
+  border: none;
+}
+
+.nav-today__button:hover {
+  background-color: darkgray;
+  color: white;
+}
+
+.button-in-right {
+  font-size: 30px;
+  border: none;
+  background-color: transparent;
+  font-weight: 900;
+  color: green;
+  cursor: pointer;
+}
+
+.button-in-right:hover {
+  color: lightgreen;
+}
+
+.button-in-left {
+  background-color: transparent;
+  font-weight: 900;
+  font-size: 30px;
+  border: none;
+  color: red;
+  cursor: pointer;
+}
+
+.button-in-left:hover {
+  color: pink;
+}
+
+.month__display {
+  font-size: 25px;
+  font-weight: 900;
+}

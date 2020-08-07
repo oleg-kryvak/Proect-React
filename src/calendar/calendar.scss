@@ -1,0 +1,166 @@
+* {
+  font-family: Roboto;
+}
+
+.calendar__header {
+  display: flex;
+}
+
+.calendar__header-day {
+  margin-top: 10px;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  font-size: 11px;
+  width: 14%;
+  font-weight: 600;
+  color: blueviolet;
+}
+.calendar__header-day:first-child {
+  margin-left: 92px;
+}
+
+.calendar__header-num {
+  margin-top: 10px;
+  font-size: 25px;
+}
+
+.circle {
+  background-color: lightblue;
+  opacity: 100%;
+  position: absolute;
+  bottom: -5px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.calendar__week {
+  width: 100%;
+  display: flex;
+}
+
+.calendar__day {
+  width: 15%;
+  border-right: 1px solid lightgrey;
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar__day:last-child {
+  border: none;
+}
+
+.calendar__day:first-child {
+  border-left: lightgray 1px solid;
+}
+
+.calendar__day-line {
+  height: 20.2px;
+  border-bottom: 1px solid lightgrey;
+}
+
+.calendar__day-sell {
+  height: 60px;
+  width: 100%;
+  border-bottom: 1px solid lightgrey;
+}
+
+.calendar__day-sell:last-child {
+  border: none;
+}
+
+.event {
+  position: relative;
+  background-color: green;
+  color: white;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 8px;
+  height: 59px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.event:hover {
+  background-color: greenyellow;
+  color: red;
+}
+
+.calendar__week-container {
+  display: flex;
+}
+
+.calendar__hours {
+  display: flex;
+  flex-direction: column;
+  width: 80px;
+  align-items: center;
+  font-size: 13px;
+  color: grey;
+}
+
+.calendar__hours__gmt {
+  font-size: 13px;
+  border-bottom: 1px solid lightgrey;
+  width: 100%;
+  padding-left: 10px;
+  height: 20.2px;
+  color: grey;
+}
+
+.calendar__hours__gmt-time {
+  height: 60px;
+}
+.calendar__hours__gmt-time:nth-child(2) {
+  height: 50px;
+}
+
+.lines {
+  display: flex;
+  width: 100%;
+}
+
+.lines__ver {
+  display: flex;
+  flex-direction: column;
+  width: 14.28%;
+  border-right: lightgray 1px solid;
+}
+
+.lines__ver:first-child {
+  border-left: lightgray 1px solid;
+}
+
+.lines__ver:last-child {
+  border-right: none;
+}
+
+.lines__hor {
+  height: 60px;
+  border-bottom: lightgray 1px solid;
+}
+
+.lines__hor:first-child {
+  margin-top: 19px;
+  border-top: lightgray 1px solid;
+}
+
+.red-line {
+  width: 13.4%;
+  background-color: red;
+  height: 2px;
+  position: absolute;
+}
+
+.red-circle {
+  width: 15px;
+  height: 15px;
+  background-color: red;
+  border-radius: 50%;
+  position: absolute;
+  left: -8px;
+  top: -6px;
+}
