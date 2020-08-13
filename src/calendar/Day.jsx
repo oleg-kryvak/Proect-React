@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import moment from "moment";
 import { generateNumbersRange } from "../logic/Functions";
-import Popup from "../modal/Popup";
 import "../calendar/calendar.scss";
+import Hours from "./Hours";
 
 class Day extends Component {
   state = {
@@ -16,25 +16,27 @@ class Day extends Component {
     const filterEvents = event.filter(
       (eventObj) => eventObj.date === formatDate
     );
+    //-------
     const hoursArray = generateNumbersRange(0, 23).map((num) => {
-      if (num - 10 < 0) {
-        return {
-          hours: `0${num}:00`,
-          events: filterEvents.filter(
-            (eventObj) => eventObj.startTime.substr(0, 2) === `0${num}`
-          ),
-        };
-      } else
-        return {
-          hours: `${num}:00`,
-          events: filterEvents.filter(
-            (eventObj) => eventObj.startTime.substr(0, 2) === num + ""
-          ),
-        };
+      return num - 10 < 0
+        ? {
+            hours: `0${num}:00`,
+            events: filterEvents.filter(
+              (eventObj) => eventObj.startTime.substr(0, 2) === `0${num}`
+            ),
+          }
+        : {
+            hours: `${num}:00`,
+            events: filterEvents.filter(
+              (eventObj) => eventObj.startTime.substr(0, 2) === num + ""
+            ),
+          };
     });
 
     return hoursArray;
   };
+
+  //---------
 
   toggleDeleteBtn = () => {
     console.log(this.state);
@@ -65,14 +67,13 @@ class Day extends Component {
     let now = new Date();
     let today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     let diff = now - today;
+    let difference;
 
     if (
       moment(this.props.day).format("YYYY-MM-DD") ===
       moment(this.state.redLine).format("YYYY-MM-DD")
     ) {
-      this.setState({
-        top: Math.round(diff / 60000 + 223),
-      });
+      difference = Math.round(diff / 60000 + 223);
     }
   };
 
@@ -94,31 +95,7 @@ class Day extends Component {
           ""
         )}
         {fullHoursArray.map((day) => {
-          return (
-            <div key={`${day}` + `${day.hours}`} className="calendar__day-sell">
-              {day.events.map((event) => {
-                return (
-                  <div
-                    key={event.id}
-                    className="event"
-                    onClick={this.toggleDeleteBtn}
-                  >
-                    {`${event.title} 
-                                   ${event.startTime} -- ${event.endTime}`}
-                    {this.state.showBox ? (
-                      <Popup
-                        showBox={this.state.showBox}
-                        id={event.id}
-                        handleEventDelete={handleEventDelete}
-                      />
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          );
+          return <Hours day={day} />;
         })}
       </>
     );
