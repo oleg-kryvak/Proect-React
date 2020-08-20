@@ -2,7 +2,6 @@ import React from "react";
 import Popup from "../modal/Popup";
 
 const Hours = (day) => {
-  console.log(day);
   const events = !day.events
     ? ""
     : day.events.map((event) => {

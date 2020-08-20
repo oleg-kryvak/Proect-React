@@ -39,8 +39,6 @@ class Day extends Component {
   //---------
 
   toggleDeleteBtn = () => {
-    console.log(this.state);
-
     this.setState({ showBox: !this.state.showBox });
   };
 
