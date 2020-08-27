@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import moment from "moment";
 import { generateNumbersRange } from "../logic/Functions";
-import "../calendar/calendar.scss";
-import Hours from "./Hours";
-
+import Popup from "../modal/Popup";
+import "./calendar.scss";
 class Day extends Component {
   state = {
     showBox: false,
@@ -11,32 +10,31 @@ class Day extends Component {
     showRedLine: false,
     top: 0,
   };
+
   getHoursWithEventsArray = (event, dayDate) => {
     const formatDate = moment(dayDate).format("YYYY-MM-DD");
     const filterEvents = event.filter(
       (eventObj) => eventObj.date === formatDate
     );
-    //-------
     const hoursArray = generateNumbersRange(0, 23).map((num) => {
-      return num - 10 < 0
-        ? {
-            hours: `0${num}:00`,
-            events: filterEvents.filter(
-              (eventObj) => eventObj.startTime.substr(0, 2) === `0${num}`
-            ),
-          }
-        : {
-            hours: `${num}:00`,
-            events: filterEvents.filter(
-              (eventObj) => eventObj.startTime.substr(0, 2) === num + ""
-            ),
-          };
+      if (num - 10 < 0) {
+        return {
+          hours: `0${num}:00`,
+          events: filterEvents.filter(
+            (eventObj) => eventObj.startTime.substr(0, 2) === `0${num}`
+          ),
+        };
+      } else
+        return {
+          hours: `${num}:00`,
+          events: filterEvents.filter(
+            (eventObj) => eventObj.startTime.substr(0, 2) === num + ""
+          ),
+        };
     });
 
     return hoursArray;
   };
-
-  //---------
 
   toggleDeleteBtn = () => {
     this.setState({ showBox: !this.state.showBox });
@@ -65,13 +63,14 @@ class Day extends Component {
     let now = new Date();
     let today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     let diff = now - today;
-    let difference;
 
     if (
       moment(this.props.day).format("YYYY-MM-DD") ===
       moment(this.state.redLine).format("YYYY-MM-DD")
     ) {
-      difference = Math.round(diff / 60000 + 223);
+      this.setState({
+        top: Math.round(diff / 60000 + 223),
+      });
     }
   };
 
@@ -86,14 +85,38 @@ class Day extends Component {
       <>
         <div className="calendar__day-sell empty"></div>
         {this.state.showRedLine ? (
-          <div className="red-line" style={{ top: `${this.state.top - 10}px` }}>
+          <div className="red-line" style={{ top: `${this.state.top}px` }}>
             <div className="red-circle"></div>
           </div>
         ) : (
           ""
         )}
         {fullHoursArray.map((day) => {
-          return <Hours day={day} />;
+          return (
+            <div key={`${day}` + `${day.hours}`} className="calendar__day-sell">
+              {day.events.map((event) => {
+                return (
+                  <div
+                    key={event.id}
+                    className="event"
+                    onClick={this.toggleDeleteBtn}
+                  >
+                    {`${event.title} 
+                                 ${event.startTime} ${event.endTime}`}
+                    {this.state.showBox ? (
+                      <Popup
+                        showBox={this.state.showBox}
+                        id={event.id}
+                        handleEventDelete={handleEventDelete}
+                      />
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          );
         })}
       </>
     );

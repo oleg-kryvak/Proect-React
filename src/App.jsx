@@ -2,13 +2,12 @@ import React, { Component } from "react";
 import Header from "./header/Header";
 import Calendar from "./calendar/Calendar";
 import Modal from "./modal/Modal";
-
 import { getStartOfWeek } from "./logic/Functions";
 import {
   fetchEventsList,
-  handleEventDelete,
+  deleteEvent,
   createEvent,
-} from "./logic/FetchOnServer.js";
+} from "./logic/FetchOnServer";
 
 class App extends Component {
   constructor(props) {
@@ -79,7 +78,7 @@ class App extends Component {
   };
 
   handleEventDelete = (id) => {
-    handleEventDelete(id).then(() => this.fetchEvents());
+    deleteEvent(id).then(() => this.fetchEvents());
   };
 
   render() {
